@@ -1,5 +1,5 @@
-# PROJECT GAME GRAFKOM
-Rencananya game ini adalah game perang 2D lalu ada beberapa level untuk tingkatannya.
+# PROJECT GAME GRAFKOM "THE ADVENTURE OF GHIFARI"
+Rencananya game ini adalah game 2D melewati tantangan di beberapa level untuk tingkatannya.
 
 # KELOMPOK 10
 - Muhammad Bagus Rizqi Alvian	192410103032 
