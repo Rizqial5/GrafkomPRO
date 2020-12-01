@@ -2,7 +2,7 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <iostream>
-#include <D:\asssss\tembok.cpp>
+#include "Asset\Tantangan Tembok\tembok.cpp"
 using namespace std;
 
 float x_move = 0.25f;
