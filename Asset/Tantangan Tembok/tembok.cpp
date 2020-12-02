@@ -1,9 +1,7 @@
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glut.h>
-void displayMe(void){
-    glClear(GL_COLOR_BUFFER_BIT);
+
+void tembok(void){
+
 
     //DASAR KAYU
     glBegin(GL_POLYGON);
@@ -174,17 +172,6 @@ void displayMe(void){
 
 
 
-	glutSwapBuffers();
+
 }
 
-int main(int argc, char** argv){
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(800, 600);
-	glutInitWindowPosition(0,0);
-	glutCreateWindow("Sepupu Steanly");
-	glutDisplayFunc(displayMe);
-	gluOrtho2D(0, 60, 0, 60);
-	glutMainLoop();
-	return 0;
-}

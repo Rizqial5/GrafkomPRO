@@ -1,8 +1,10 @@
 # depslib dependency file v1.0
-1606218978 source:d:\codebloks\batukotak3x3\main.cpp
-	<GLUT/glut.h>
+1606811096 source:d:\asssss\main.cpp
+	<GL/gl.h>
+	<GL/glu.h>
 	<GL/glut.h>
-	<stdlib.h>
+	<iostream>
+	<D:\asssss\tembok.cpp>
 
 881786480 c:\program files (x86)\codeblocks\mingw\include\gl\glut.h
 	<windows.h>
@@ -219,13 +221,26 @@
 	<stddef.h>
 	<GL/gl.h>
 
-1606220144 source:e:\3.projectgrafkom\2.tugas 2 buat batu 3x3\batukotak3x3\main.cpp
-	<GLUT/glut.h>
-	<GL/glut.h>
-	<stdlib.h>
+1606811086 d:\asssss\tembok.cpp
 
-1606220144 source:e:\project grafkom\grafkompro\asset\batukotak3x3\main.cpp
-	<GLUT/glut.h>
+1606811096 source:d:\game\main.cpp
+	<GL/gl.h>
+	<GL/glu.h>
 	<GL/glut.h>
-	<stdlib.h>
+	<iostream>
+	<D:\asssss\tembok.cpp>
+
+1606812718 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<iostream>
+	"Asset\Tantangan Tembok\tembok.cpp"
+
+1606812290 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\asset\tantangan tembok\tembok.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+
+1606812733 d:\bagus\tugas\semester 3\grafkom\grafkompro\asset\tantangan tembok\tembok.cpp
 
