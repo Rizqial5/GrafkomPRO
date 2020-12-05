@@ -6,6 +6,7 @@
 using namespace std;
 
 float x_move = 0.25f;
+float y_move = 0.25f;
 float x_pos;
 float y_pos;
 float x_char ;
@@ -13,11 +14,11 @@ float y_char ;
 
 
 void kotak(void){
-
+    float kir = 10;
 
     glBegin(GL_POLYGON);
     glColor3ub(0,180,0);
-        glVertex2f(10, 10);
+        glVertex2f(kir, 10);
         glVertex2f(15, 10);
         glVertex2f(15, 15);
         glVertex2f(10,15);
@@ -30,7 +31,7 @@ void kotakpos(void){
 
     glPushMatrix();
     glTranslatef(17,20,0);
-    glTranslatef(x_pos,y_pos,0);
+    glTranslatef(x_pos,0,0);
     kotak();
     glPopMatrix();
 
@@ -41,7 +42,16 @@ void kotakpos(void){
         x_move = -0.25f;
     } else if (x_pos <= -12){
         x_move = 0.25f;
-    };
+    }
+    if (y_pos>=13){
+        y_move = -0.25f;
+    } else if (y_pos <= -12){
+        y_move = 0.25f;
+    }
+
+    //cout<<"kotakx : "<<x_pos<<endl;
+
+
 }
 
 
@@ -72,14 +82,21 @@ void charpos(void){
 
     if (x_char>=5){
        x_char += -speed;
+
     } else if (x_char <= -20){
         x_char+= speed ;
     }
 
     if (y_char>=21){
        y_char += -speed;
+       if (x_char == -15 ){
+            y_char += speed;
+       }
     } else if (y_char <= -4){
         y_char+= speed;
+        if (x_char == -5){
+            y_char += -speed;
+        }
     }
 
 
@@ -93,11 +110,11 @@ void charpos(void){
         y_char += speed;
         } else if (GetAsyncKeyState(VK_DOWN)){
         y_char += -speed;
+        }
 
-
-
-    }
-
+    //cout<<"x: "<<x_char<<endl;
+    //cout<<"y: " <<y_char<<endl;
+    //cout<<"soeed: " <<speed<<endl;
 
 
 }
@@ -149,6 +166,7 @@ void st_trans(void){
 
 void controller(int data){
     x_pos+=x_move;
+    y_pos+=y_move;
    // y_pos+=grav;
     //grav-=0.01f;
     glutPostRedisplay();
@@ -165,7 +183,8 @@ void displayMe(void){
     stage1();
     charpos();
     kotakpos();
-    tembok();
+    //tembok();
+
 
 
     glPopMatrix();
