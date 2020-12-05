@@ -104,52 +104,52 @@ void tembok(void){
         glColor3ub(255,255,255);
         glVertex2f(4, 6);
         glVertex2f(6, 6);
-        glVertex2f(5, 7);
+        glVertex2f(5, 8);
 	glEnd();
 	glBegin(GL_POLYGON);
         glColor3ub(51,51,51);
         glVertex2f(4, 6);
         glVertex2f(4.5, 6);
-        glVertex2f(4.5, 6.5);
+        glVertex2f(4.5, 8);
 	glEnd();
 
 	glBegin(GL_POLYGON);
         glColor3ub(255,255,255);
         glVertex2f(9, 6);
         glVertex2f(11, 6);
-        glVertex2f(10, 7);
+        glVertex2f(10, 8);
 	glEnd();
 	glBegin(GL_POLYGON);
         glColor3ub(51,51,51);
         glVertex2f(9, 6);
         glVertex2f(9.5, 6);
-        glVertex2f(9.5, 6.5);
+        glVertex2f(9.5, 8);
 	glEnd();
 
 	glBegin(GL_POLYGON);
         glColor3ub(255,255,255);
         glVertex2f(20, 6);
         glVertex2f(22, 6);
-        glVertex2f(21, 7);
+        glVertex2f(21, 8);
 	glEnd();
 	glBegin(GL_POLYGON);
         glColor3ub(51,51,51);
         glVertex2f(20, 6);
         glVertex2f(20.5, 6);
-        glVertex2f(20.5, 6.5);
+        glVertex2f(20.5, 8);
 	glEnd();
 
 	glBegin(GL_POLYGON);
         glColor3ub(255,255,255);
         glVertex2f(26, 6);
         glVertex2f(28, 6);
-        glVertex2f(27, 7);
+        glVertex2f(27, 8);
 	glEnd();
 	glBegin(GL_POLYGON);
         glColor3ub(51,51,51);
         glVertex2f(26, 6);
         glVertex2f(26.5, 6);
-        glVertex2f(26.5, 6.5);
+        glVertex2f(26.5, 8);
 	glEnd();
 
 	//PISAU
