@@ -9,6 +9,15 @@ using namespace std;
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <iostream>
+#include<stdio.h>
+#include <fstream>
+#define ROWS 60
+#define COLUMNS 60
+#define UP 1
+#define RIGHT 2
+#define DOWN -1
+#define LEFT -2
+
 
 using namespace std;
 
@@ -28,6 +37,24 @@ float x_bataskiriBOX = 5;
 float x_bataskananBOX = 34;
 float y_batasatasBOX = 48;
 float y_batasbawahBOX = 40;
+int nyawa = 3;
+int score ;
+char cetakScore[1000];
+char cetakNyawa[1000];
+
+void *font = GLUT_BITMAP_HELVETICA_12;
+void *font2 = GLUT_BITMAP_TIMES_ROMAN_24;
+
+//SNAKE
+std::ofstream ofile;
+std::ifstream ifile;
+bool game_over=false;
+void input_callback(int,int,int);
+void reshape_callback(int,int);
+int rows=0,columns=0;
+void init();
+int sDirection = RIGHT;
+
 
 
 void kotak(void){
@@ -844,12 +871,14 @@ void charpos(void){
 void collider(void){
 
     if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        cout<<"cok"<<endl;
+        game_over = true;
     }
     if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        cout<<"cok"<<endl;
+        nyawa -= 1;
+        if (nyawa==0) {
+            game_over = true;
+        }
     }
-
 }
 
 
@@ -917,14 +946,112 @@ void output(int x, int y, float r, float g, float b, char *string, void *font) {
         glutBitmapCharacter(font, string[i]);
     }
 }
+void drawText(int x, int y, const char *string) {
+	glRasterPos2f(x, y);
+	int len = (int)strlen(string);
+	for (int i = 0; i < len; i++) {
+		glutBitmapCharacter(font2, string[i]);
+	}
+}
+void judul(void){
+    glBegin(GL_POLYGON);
+        glColor3ub(1,152,0);
+        glVertex2f(15, 55);
+        glVertex2f(50, 55);
+        glVertex2f(50, 60);
+        glVertex2f(15,60);
+        glColor3ub(1,2,0);
+        drawText(15,57, "THE ADVENTURE OF GHIFFARI");
+	glEnd();
+}
+
+//SNAKE
+void display_callback()
+{
+    if(game_over == true)
+    {
+        ofile.open("score.dat",std::ios::trunc);
+        ofile<<score<<std::endl;
+        ofile.close();
+        ifile.open("score.dat",std::ios::in);
+        char a[4];
+        ifile>>a;
+        std::cout<<a;
+        char text[50]= "Your score : ";
+        strcat(text,a);
+        MessageBox(NULL,text,"Game Over",0);
+        exit(0);
+    }
+}
+void reshape_callback(int w, int h)
+{
+    glViewport(0,0,(GLfloat)w,GLfloat(h));
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0,COLUMNS,0.0,ROWS,-1.0,1.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+void initGrid(int x,int y)
+{
+    columns=x;
+    rows=y;
+}
+void init()
+{
+    glClearColor(0.0,0.0,0.0,0.0);
+    initGrid(COLUMNS, ROWS);
+}
+void input_callback(int key,int x,int y)
+{
+    switch(key)
+    {
+    case GLUT_KEY_UP:
+        if(sDirection!=DOWN)
+            sDirection=UP;
+        break;
+    case GLUT_KEY_DOWN:
+        if(sDirection!=UP)
+            sDirection=DOWN;
+        break;
+    case GLUT_KEY_RIGHT:
+        if(sDirection!=LEFT)
+            sDirection=RIGHT;
+        break;
+    case GLUT_KEY_LEFT:
+        if(sDirection!=RIGHT)
+            sDirection=LEFT;
+        break;
+    }
+}
+
+
 void displayMe(void){
+
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
+
+    init();
     stage1();
     charpos();
     kotakpos();
     collider();
+
+   // judul();
+
     glPopMatrix();
+    glColor3f(0, 0, 0);
+
+    sprintf(cetakScore, "%d", score);
+    sprintf(cetakNyawa, "%d", nyawa);
+
+    drawText(1, 40, "Score: ");
+	drawText(9, 40, cetakScore);
+	drawText(1, 44, "Nyawa: ");
+	drawText(9, 44, cetakNyawa);
+
+
+
 
     glFlush();
     glutSwapBuffers();
@@ -947,6 +1074,9 @@ int main(int argc, char** argv){
 	glutInitWindowSize(800, 600);
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("Sepupu Steanly");
+    glutDisplayFunc(display_callback);
+    glutReshapeFunc(reshape_callback);
+    glutSpecialFunc(input_callback);
 	glutTimerFunc(1,controller,0);
 	glutDisplayFunc(displayMe);
 	gluOrtho2D(0, 60, 0, 60);
