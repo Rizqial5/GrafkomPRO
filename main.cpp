@@ -37,7 +37,7 @@ float x_bataskiriBOX = 5;
 float x_bataskananBOX = 34;
 float y_batasatasBOX = 48;
 float y_batasbawahBOX = 40;
-int nyawa = 3;
+int nyawa = 100;
 int score ;
 char cetakScore[1000];
 char cetakNyawa[1000];
@@ -238,11 +238,11 @@ void kotakpos(void){
 
 
     if (x_pos>=21){
-        x_move = -0.15f;
+        x_move = -0.01f;
 
 
     } else if (x_pos <= 0){
-        x_move = 0.15f;
+        x_move = 0.01f;
     };
 
 
@@ -816,7 +816,7 @@ glBegin(GL_POLYGON);
 }
 
 void charpos(void){
-    float speed = 0.25f;
+    float speed = 0.01f;
     //bool  obstacle = false;
     glPushMatrix();
 
@@ -871,13 +871,16 @@ void charpos(void){
 void collider(void){
 
     if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        game_over = true;
+        nyawa -= 1;
     }
+
     if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
         nyawa -= 1;
-        if (nyawa==0) {
-            game_over = true;
-        }
+    }
+    if (nyawa == 0){
+        printf("GAME OVER");
+        glutDestroyWindow(0);
+        //exit(0);
     }
 }
 
@@ -965,73 +968,12 @@ void judul(void){
 	glEnd();
 }
 
-//SNAKE
-void display_callback()
-{
-    if(game_over == true)
-    {
-        ofile.open("score.dat",std::ios::trunc);
-        ofile<<score<<std::endl;
-        ofile.close();
-        ifile.open("score.dat",std::ios::in);
-        char a[4];
-        ifile>>a;
-        std::cout<<a;
-        char text[50]= "Your score : ";
-        strcat(text,a);
-        MessageBox(NULL,text,"Game Over",0);
-        exit(0);
-    }
-}
-void reshape_callback(int w, int h)
-{
-    glViewport(0,0,(GLfloat)w,GLfloat(h));
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0,COLUMNS,0.0,ROWS,-1.0,1.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-void initGrid(int x,int y)
-{
-    columns=x;
-    rows=y;
-}
-void init()
-{
-    glClearColor(0.0,0.0,0.0,0.0);
-    initGrid(COLUMNS, ROWS);
-}
-void input_callback(int key,int x,int y)
-{
-    switch(key)
-    {
-    case GLUT_KEY_UP:
-        if(sDirection!=DOWN)
-            sDirection=UP;
-        break;
-    case GLUT_KEY_DOWN:
-        if(sDirection!=UP)
-            sDirection=DOWN;
-        break;
-    case GLUT_KEY_RIGHT:
-        if(sDirection!=LEFT)
-            sDirection=RIGHT;
-        break;
-    case GLUT_KEY_LEFT:
-        if(sDirection!=RIGHT)
-            sDirection=LEFT;
-        break;
-    }
-}
-
 
 void displayMe(void){
 
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
 
-    init();
     stage1();
     charpos();
     kotakpos();
@@ -1074,9 +1016,6 @@ int main(int argc, char** argv){
 	glutInitWindowSize(800, 600);
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("Sepupu Steanly");
-    glutDisplayFunc(display_callback);
-    glutReshapeFunc(reshape_callback);
-    glutSpecialFunc(input_callback);
 	glutTimerFunc(1,controller,0);
 	glutDisplayFunc(displayMe);
 	gluOrtho2D(0, 60, 0, 60);
