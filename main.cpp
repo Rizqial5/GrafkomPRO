@@ -21,12 +21,14 @@ using namespace std;
 
 using namespace std;
 
-float x_move = 0.25f;
-float y_move = 0.25f;
+
+float x_move = 0.2f;
+float y_move = 0.2f;
 float x_pos;
 float y_pos;
 float x_char;
 float y_char ;
+float speed = 0.2f;
 
 float x_bataskiriChar = 0.5;
 float x_bataskananChar = 9.5;
@@ -238,15 +240,16 @@ void kotakpos(void){
 
 
     if (x_pos>=21){
-        x_move = -0.01f;
+        x_move = -0.2f;
 
 
     } else if (x_pos <= 0){
-        x_move = 0.01f;
+        x_move = 0.2f;
     };
 
 
 }
+
 
 void chara(void){
 
@@ -816,7 +819,8 @@ glBegin(GL_POLYGON);
 }
 
 void charpos(void){
-    float speed = 0.01f;
+
+    speed = 0.2f;
     //bool  obstacle = false;
     glPushMatrix();
 
@@ -864,25 +868,35 @@ void charpos(void){
        // cout<<"x kanan : "<<x_bataskananChar<<endl;
 
 
-
-
 }
 
 void collider(void){
 
     if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
         nyawa -= 1;
+        y_char -= speed;
+        y_batasatasChar -= speed;
+
+
+
+
+
     }
 
-    if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
+    else if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
         nyawa -= 1;
     }
+
+
+
     if (nyawa == 0){
         printf("GAME OVER");
         glutDestroyWindow(0);
         //exit(0);
     }
+
 }
+
 
 
 void stage1 (void){
@@ -1013,12 +1027,12 @@ void myinit(){
 int main(int argc, char** argv){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(1000, 600);
 	glutInitWindowPosition(0,0);
 	glutCreateWindow("Sepupu Steanly");
 	glutTimerFunc(1,controller,0);
 	glutDisplayFunc(displayMe);
-	gluOrtho2D(0, 60, 0, 60);
+	gluOrtho2D(0, 100, 0, 60);
 	myinit();
 	glutMainLoop();
 	return 0;
