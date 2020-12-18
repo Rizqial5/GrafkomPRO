@@ -230,12 +230,13 @@
 	<iostream>
 	<D:\asssss\tembok.cpp>
 
-1608216055 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
+1608275854 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
 	<iostream>
 	"Asset\Tantangan Tembok\tembok.cpp"
+	"Asset\DesainCharInsya\Char.cpp"
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -274,4 +275,9 @@
 1341006780 c:\program files (x86)\codeblocks\mingw\include\sys\types.h
 	<_mingw.h>
 	<stddef.h>
+
+1608275946 d:\bagus\tugas\semester 3\grafkom\grafkompro\asset\desaincharinsya\char.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
 
