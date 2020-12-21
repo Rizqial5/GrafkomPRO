@@ -45,15 +45,6 @@ char cetakNyawa[1000];
 void *font = GLUT_BITMAP_HELVETICA_12;
 void *font2 = GLUT_BITMAP_TIMES_ROMAN_24;
 
-//SNAKE
-std::ofstream ofile;
-std::ifstream ifile;
-bool game_over=false;
-void input_callback(int,int,int);
-void reshape_callback(int,int);
-int rows=0,columns=0;
-void init();
-int sDirection = RIGHT;
 
 
 
