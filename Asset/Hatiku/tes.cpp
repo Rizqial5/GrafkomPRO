@@ -66,67 +66,7 @@ void kotakKeterangan(void){
 	glEnd();
 }
 void levelHati(void){
-    glColor3f(1.0,0.0,100);
-    glBegin(GL_POLYGON);
-    glVertex2f(2.4,0.32);
-    glVertex2f(2.14,0.52);
-    glVertex2f(1.92,0.71);
-    glVertex2f(1.75,0.9);//c
-    glVertex2f(1.61,1.08);//d
-    glVertex2f(1.52,1.29);//e
-    glVertex2f(1.58,1.52);//f
-    glVertex2f(1.77,1.66);//g
-    glVertex2f(1.95,1.75);//h
-    glVertex2f(2.11,1.72);//a1
-    glVertex2f(2.24,1.6);//B1
-    glVertex2f(2.34,1.45);//I1
-    glVertex2f(2.41,1.29);//J1
-    glVertex2f(2.51,1.45);//K1
-    glVertex2f(2.64,1.59);//L1
-    glVertex2f(2.78,1.73);//M1
-    glVertex2f(3,1.76);//N1
-    glVertex2f(3.16,1.65);//O1
-    glVertex2f(3.28,1.48);//P1
-    glVertex2f(3.34,1.26);//Q1
-    glVertex2f(3.23,1.06);//R1
-    glVertex2f(3.08,0.88);//T1
-    glVertex2f(2.89,0.71);//U1
-    glVertex2f(2.67,0.52);//V1
-    glEnd();
-
-}
-void levelHati1(void){
-    glColor3f(1.0,0.0,100);
-    glBegin(GL_POLYGON);
-    glVertex2f(2.4,0.32);
-    glVertex2f(2.14,0.52);
-    glVertex2f(1.92,0.71);
-    glVertex2f(1.75,0.9);//c
-    glVertex2f(1.61,1.08);//d
-    glVertex2f(1.52,1.29);//e
-    glVertex2f(1.58,1.52);//f
-    glVertex2f(1.77,1.66);//g
-    glVertex2f(1.95,1.75);//h
-    glVertex2f(2.11,1.72);//a1
-    glVertex2f(2.24,1.6);//B1
-    glVertex2f(2.34,1.45);//I1
-    glVertex2f(2.41,1.29);//J1
-    glVertex2f(2.51,1.45);//K1
-    glVertex2f(2.64,1.59);//L1
-    glVertex2f(2.78,1.73);//M1
-    glVertex2f(3,1.76);//N1
-    glVertex2f(3.16,1.65);//O1
-    glVertex2f(3.28,1.48);//P1
-    glVertex2f(3.34,1.26);//Q1
-    glVertex2f(3.23,1.06);//R1
-    glVertex2f(3.08,0.88);//T1
-    glVertex2f(2.89,0.71);//U1
-    glVertex2f(2.67,0.52);//V1
-    glEnd();
-
-}
-void levelHati2(void){
-    glColor3f(1.0,0.0,100);
+    glColor3f(1.0,0.0,0.0);
     glBegin(GL_POLYGON);
     glVertex2f(2.4,0.32);
     glVertex2f(2.14,0.52);
@@ -396,30 +336,6 @@ void charpos(void){
 
 
 }
-void posisiHati(void){
-
-    glPushMatrix();
-    glTranslatef(65,46.5,0);
-    levelHati();
-    glPopMatrix();
-
-}
-void posisiHati1(void){
-
-    glPushMatrix();
-    glTranslatef(70,46.5,0);
-    levelHati1();
-    glPopMatrix();
-
-}
-void posisiHati2(void){
-
-    glPushMatrix();
-    glTranslatef(75,46.5,0);
-    levelHati2();
-    glPopMatrix();
-
-}
 void collider(void){
 
     if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
@@ -435,17 +351,12 @@ void collider(void){
     }
 
 
-    if (nyawa == 75) {
-        posisiHati1();
-        printf("85");
-    }
 
     if (nyawa == 0){
         printf("GAME OVER");
         glutDestroyWindow(0);
         //exit(0);
     }
-
 
 }
 void stage1 (void){
@@ -527,7 +438,6 @@ void judul(void){
         drawText(15,57, "THE ADVENTURE OF GHIFFARI");
 	glEnd();
 }
-
 void displayMe(void){
 
     glClear(GL_COLOR_BUFFER_BIT);
@@ -536,28 +446,26 @@ void displayMe(void){
     stage1();
     charpos();
     kotakpos();
-    kotakKeterangan();
-    posisiHati();
-    posisiHati1();
-    posisiHati2();
     collider();
+    levelHati();
 
-
-
+    kotakKeterangan();
 
    // judul();
 
     glPopMatrix();
     glColor3f(0, 0, 0);
 
-//    sprintf(cetakScore, "%d", score);
+    sprintf(cetakScore, "%d", score);
     sprintf(cetakNyawa, "%d", nyawa);
 
-//    drawText(1, 40, "Score: ");
-//	drawText(9, 40, cetakScore);
+    drawText(1, 40, "Score: ");
+	drawText(9, 40, cetakScore);
 	drawText(65, 51, "Nyawa: ");
-	drawText(68, 55, "The Adventure of Ghifari");
 	drawText(9, 44, cetakNyawa);
+
+
+
 
     glFlush();
     glutSwapBuffers();
