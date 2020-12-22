@@ -399,45 +399,44 @@ void charpos(void){
 void posisiHati(void){
 
     glPushMatrix();
-    glTranslatef(65,46.5,0);
-    levelHati();
+    if (nyawa >= 25){
+        glTranslatef(65,46.5,0);
+        levelHati();
+    }
     glPopMatrix();
-
 }
 void posisiHati1(void){
 
     glPushMatrix();
-    glTranslatef(70,46.5,0);
-    levelHati1();
+    if (nyawa >= 50){
+        glTranslatef(70,46.5,0);
+        levelHati1();
+    }
     glPopMatrix();
 
 }
 void posisiHati2(void){
 
     glPushMatrix();
-    glTranslatef(75,46.5,0);
-    levelHati2();
+    if (nyawa >= 75){
+        glTranslatef(75,46.5,0);
+        levelHati2();
+    }
     glPopMatrix();
 
 }
 void collider(void){
 
     if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        nyawa -= 1;
+        nyawa -= 5;
         y_char -= speed;
         y_batasatasChar -= speed;
     }
 
     else if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        nyawa -= 1;
+        nyawa -= 5;
         y_char += speed;
         y_batasbawahChar += speed;
-    }
-
-
-    if (nyawa == 75) {
-        posisiHati1();
-        printf("85");
     }
 
     if (nyawa == 0){
@@ -527,7 +526,6 @@ void judul(void){
         drawText(15,57, "THE ADVENTURE OF GHIFFARI");
 	glEnd();
 }
-
 void displayMe(void){
 
     glClear(GL_COLOR_BUFFER_BIT);
