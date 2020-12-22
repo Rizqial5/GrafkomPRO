@@ -48,6 +48,9 @@ char cetakNyawa[1000];
 void *font = GLUT_BITMAP_HELVETICA_12;
 void *font2 = GLUT_BITMAP_TIMES_ROMAN_24;
 
+bool CharUp = true;
+bool CharDown;
+
 
 void kotakKeterangan(void){
     glBegin(GL_POLYGON);
@@ -353,22 +356,43 @@ void charpos(void){
     glTranslatef(45,5,0);
     glTranslatef(x_char,y_char,0);
 
-    chara();
+    if(CharUp == true){
+        upchar();
+    }
+    else if(CharDown == true){
+        chara();
+    }
 
     glPopMatrix();
 
 
-    /*if (x_char>=26){
+    if (x_char>=1){
        x_char += -speed;
-    } else if (x_char <= -20){
+       x_bataskananChar += -speed;
+       x_bataskiriChar  += -speed;
+
+    } else if (x_char <= -41){
         x_char+= speed ;
+        x_bataskiriChar += speed;
+        x_bataskananChar += speed;
     }
 
-    if (y_char>=40){
-       y_char += -speed;
-    } else if (y_char <= -4){
+    if (y_char>=45){
+        y_char += -speed;
+        y_batasatasChar += -speed;
+        y_batasbawahChar += -speed;
+        if(x_char <= -35){
+            y_char += speed;
+            y_batasatasChar += speed;
+            y_batasbawahChar += speed;
+        }
+
+    } else if (y_char <= -1){
         y_char+= speed;
-    }*/
+        y_batasatasChar += speed;
+        y_batasbawahChar += speed;
+    }
+
 
 
     //if (obstacle == false){
@@ -385,14 +409,18 @@ void charpos(void){
         y_char += speed;
         y_batasatasChar += speed;
         y_batasbawahChar += speed;
+        CharUp = true;
+        CharDown = false;
 
         } else if (GetAsyncKeyState(VK_DOWN)){
         y_char += -speed;
         y_batasbawahChar += -speed;
         y_batasatasChar += -speed;
+        CharUp = false;
+        CharDown =true;
         }
-        //cout<<"x kiri : "<<x_bataskiriChar<<endl;
-       // cout<<"x kanan : "<<x_bataskananChar<<endl;
+        cout<<"x kiri : "<<x_char<<endl;
+       cout<<"x kanan : "<<y_char<<endl;
 
 
 }
