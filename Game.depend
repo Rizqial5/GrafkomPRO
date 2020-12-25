@@ -293,3 +293,30 @@
 	<GL/glu.h>
 	<GL/glut.h>
 
+1608900123 source:e:\project grafkom\grafkompro\main.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<iostream>
+	"Asset\Tantangan Tembok\tembok.cpp"
+	"Asset\DesainCharInsya\Char.cpp"
+	"stage2.cpp"
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+	<iostream>
+	<stdio.h>
+	<fstream>
+
+1608354862 e:\project grafkom\grafkompro\asset\tantangan tembok\tembok.cpp
+
+1608900123 e:\project grafkom\grafkompro\asset\desaincharinsya\char.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+
+1608900123 e:\project grafkom\grafkompro\stage2.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+
