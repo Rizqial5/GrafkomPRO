@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Asset\Tantangan Tembok\tembok.cpp"
 #include "Asset\DesainCharInsya\Char.cpp"
+#include "stage2.cpp"
 using namespace std;
 
 #include <GL/gl.h>
@@ -28,7 +29,9 @@ float y_move = 0.2f;
 float x_pos;
 float y_pos;
 float x_char;
+float x_char2;
 float y_char ;
+float y_char2 ;
 float speed = 0.2f;
 
 float x_bataskiriChar = 45.5;
@@ -50,6 +53,9 @@ void *font2 = GLUT_BITMAP_TIMES_ROMAN_24;
 
 bool CharUp = true;
 bool CharDown;
+
+bool rintangan1 = true;
+bool rintangan2;
 
 
 void kotakKeterangan(void){
@@ -347,25 +353,8 @@ void kotakpos(void){
 
 
 }
-void charpos(void){
 
-    speed = 0.2f;
-    //bool  obstacle = false;
-    glPushMatrix();
-
-    glTranslatef(45,5,0);
-    glTranslatef(x_char,y_char,0);
-
-    if(CharUp == true){
-        upchar();
-    }
-    else if(CharDown == true){
-        chara();
-    }
-
-    glPopMatrix();
-
-
+void colliST1(void){
     if (x_char>=1){
        x_char += -speed;
        x_bataskananChar += -speed;
@@ -392,21 +381,100 @@ void charpos(void){
         y_batasatasChar += speed;
         y_batasbawahChar += speed;
     }
+}
 
+void colliST2(void){
+    if (x_char>=41){
+       x_char += -speed;
+       x_bataskananChar += -speed;
+       x_bataskiriChar  += -speed;
+
+    } else if (x_char <= -1){
+        x_char+= speed ;
+        x_bataskiriChar += speed;
+        x_bataskananChar += speed;
+    }
+
+    if (y_char2>=45){
+        y_char2 += -speed;
+        y_batasatasChar += -speed;
+        y_batasbawahChar += -speed;
+
+    } else if (y_char2 <= 4){
+        y_char2 += speed;
+        y_batasatasChar += speed;
+        y_batasbawahChar += speed;
+    }
+
+
+}
+
+void colliSTp(void){
+    if(rintangan1 == true){
+        colliST1();
+    } else if (rintangan2 == true){
+        colliST2();
+    }
+
+
+}
+void charpos(void){
+
+    speed = 0.2f;
+    //bool  obstacle = false;
+    glPushMatrix();
+
+    if(rintangan1 == true){
+        glTranslatef(45,5,0);
+        glTranslatef(x_char,y_char,0);
+        if(CharUp == true){
+            upchar();
+        }
+        else if(CharDown == true){
+            chara();
+        }
+
+
+    } else if (rintangan2 == true){
+
+        glTranslatef(5,0,0);
+        glTranslatef(x_char,y_char2,0);
+        if(CharUp == true){
+            upchar();
+        }
+        else if(CharDown == true){
+            chara();
+        }
+
+
+    }
+
+    glTranslatef(x_char,y_char,0);
+
+
+    glPopMatrix();
+
+
+    colliSTp();
 
 
     //if (obstacle == false){
         if (GetAsyncKeyState(VK_RIGHT)){
         x_char+= speed ;
+
         x_bataskananChar += speed;
         x_bataskiriChar += speed;
         } else if (GetAsyncKeyState(VK_LEFT)){
         x_char += -speed;
+
         x_bataskiriChar += -speed;
         x_bataskananChar += -speed;
         }
         if (GetAsyncKeyState(VK_UP)){
         y_char += speed;
+         if(rintangan2 == true){
+            y_char2 += speed;
+         }
         y_batasatasChar += speed;
         y_batasbawahChar += speed;
         CharUp = true;
@@ -414,13 +482,16 @@ void charpos(void){
 
         } else if (GetAsyncKeyState(VK_DOWN)){
         y_char += -speed;
+        if(rintangan2 == true){
+            y_char2 += -speed;
+         }
         y_batasbawahChar += -speed;
         y_batasatasChar += -speed;
         CharUp = false;
         CharDown =true;
         }
-        cout<<"x kiri : "<<x_char<<endl;
-       cout<<"x kanan : "<<y_char<<endl;
+        cout<<"x  : "<<x_char<<endl;
+       cout<<"y : "<<y_char<<endl;
 
 
 }
@@ -509,6 +580,47 @@ void stage1 (void){
 	glEnd();
 
 }
+void stagesatuisi(void){
+    glPushMatrix();
+    stage1();
+    charpos();
+    kotakpos();
+    collider();
+
+
+    glPopMatrix();
+
+
+}
+void stageduaisi(void){
+    glPushMatrix();
+    stage2();
+    charpos();
+    //collider();
+
+    glPopMatrix();
+
+}
+void selectorSt(void){
+    glPushMatrix();;
+        if(rintangan1 == true){
+            stagesatuisi();
+        }
+        else if (rintangan2 == true){
+            stageduaisi();
+        }
+    glPopMatrix();
+
+    if(GetAsyncKeyState(VK_NUMPAD2)){
+        rintangan1 = true;
+        rintangan2 = false;
+    } else if (y_char>=45 && x_char <= -35/*GetAsyncKeyState(VK_NUMPAD3)*/){
+        rintangan1 = false;
+        rintangan2 = true;
+    }
+
+
+}
 void st_trans(void){
     glPushMatrix();
     glScalef(2,2,0);
@@ -559,14 +671,11 @@ void displayMe(void){
     glClear(GL_COLOR_BUFFER_BIT);
     glPushMatrix();
 
-    stage1();
-    charpos();
-    kotakpos();
+    selectorSt();
     kotakKeterangan();
     posisiHati();
     posisiHati1();
     posisiHati2();
-    collider();
 
 
 

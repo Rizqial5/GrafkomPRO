@@ -2,8 +2,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-void displayMe(void){
-    glClear(GL_COLOR_BUFFER_BIT);
+void stage2(void){
+
 
     glBegin(GL_POLYGON);
         glColor3ub(255,255,0);
@@ -37,17 +37,6 @@ void displayMe(void){
         glVertex2f(5,5);
 	glEnd();
 
-	glutSwapBuffers();
+
 }
 
-int main(int argc, char** argv){
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(1000, 600);
-	glutInitWindowPosition(0,0);
-	glutCreateWindow("Sepupu Steanly");
-	glutDisplayFunc(displayMe);
-	gluOrtho2D(0, 100, 0, 60);
-	glutMainLoop();
-	return 0;
-}

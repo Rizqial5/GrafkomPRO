@@ -230,13 +230,14 @@
 	<iostream>
 	<D:\asssss\tembok.cpp>
 
-1608634627 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
+1608885922 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
 	<iostream>
 	"Asset\Tantangan Tembok\tembok.cpp"
 	"Asset\DesainCharInsya\Char.cpp"
+	"stage2.cpp"
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -283,6 +284,11 @@
 	<GL/glut.h>
 
 1608511228 f:\kuliah\semester 3\grafika komputer pr\uts jadi\project game grafkom\grafkompro\asset\desaincharinsya\char.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
+
+1608879583 d:\bagus\tugas\semester 3\grafkom\grafkompro\stage2.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
