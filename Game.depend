@@ -230,7 +230,7 @@
 	<iostream>
 	<D:\asssss\tembok.cpp>
 
-1608916012 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
+1608917912 source:d:\bagus\tugas\semester 3\grafkom\grafkompro\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -239,6 +239,7 @@
 	"Asset\DesainCharInsya\Char.cpp"
 	"Asset\Peluru bintang versi kecil\main.cpp"
 	"stage2.cpp"
+	"stage3.cpp"
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
@@ -325,4 +326,9 @@
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
+
+1608917313 d:\bagus\tugas\semester 3\grafkom\grafkompro\stage3.cpp
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/glut.h>
 

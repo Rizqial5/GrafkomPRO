@@ -5,7 +5,8 @@
 #include "Asset\Tantangan Tembok\tembok.cpp"
 #include "Asset\DesainCharInsya\Char.cpp"
 #include "Asset\Peluru bintang versi kecil\main.cpp"
-#include "stage2.cpp"
+#include "stage2.cpp"'
+#include "stage3.cpp"
 using namespace std;
 
 #include <GL/gl.h>
@@ -71,6 +72,7 @@ bool CharDown;
 
 bool rintangan1 = true;
 bool rintangan2;
+bool akhir;
 
 
 void kotakKeterangan(void){
@@ -366,10 +368,10 @@ void peluru(void){
          if(rintangan2==true){
         glTranslatef(25,52.5,0);
 
-        y_peluru += -0.5;
+        y_peluru += -1.5;
 
-        y_batasataspeluru += -0.5;
-        y_batasbawahpeluru += -0.5;
+        y_batasataspeluru += -1.5;
+        y_batasbawahpeluru += -1.5;
         glTranslatef(0,y_peluru,0);
 
         bintang();
@@ -447,25 +449,36 @@ void colliST1(void){
 void colliST2(void){
     if (x_char>=41){
        x_char += -speed;
-       x_bataskananChar += -speed;
-       x_bataskiriChar  += -speed;
+       x_bataskananChar2 += -speed;
+       x_bataskiriChar2  += -speed;
+       if (y_char>=42){
+            akhir = true;
+            rintangan1 = false;
+            rintangan2 = false;
+            x_char += speed;
+            x_bataskananChar2 += speed;
+            x_bataskiriChar2  += -speed;
+
+       }
 
     } else if (x_char <= -1){
         x_char+= speed ;
-        x_bataskiriChar += speed;
-        x_bataskananChar += speed;
+        x_bataskiriChar2 += speed;
+        x_bataskananChar2 += speed;
     }
 
     if (y_char2>=45){
         y_char2 += -speed;
-        y_batasatasChar += -speed;
-        y_batasbawahChar += -speed;
+        y_batasatasChar2 += -speed;
+        y_batasbawahChar2 += -speed;
+
 
     } else if (y_char2 <= 4){
         y_char2 += speed;
-        y_batasatasChar += speed;
-        y_batasbawahChar += speed;
+        y_batasatasChar2 += speed;
+        y_batasbawahChar2 += speed;
     }
+
 
 
 }
@@ -595,7 +608,7 @@ void charpos(void){
 void posisiHati(void){
 
     glPushMatrix();
-    if (nyawa >= 25){
+    if (nyawa >= 10){
         glTranslatef(65,46.5,0);
         levelHati();
     }
@@ -614,7 +627,7 @@ void posisiHati1(void){
 void posisiHati2(void){
 
     glPushMatrix();
-    if (nyawa >= 75){
+    if (nyawa >= 76){
         glTranslatef(75,46.5,0);
         levelHati2();
     }
@@ -644,16 +657,16 @@ void collider(void){
             x_bataskiripeluru <= x_bataskananChar2&&
             x_bataskananpeluru >= x_bataskiriChar2 &&
             x_bataskananpeluru <= x_bataskananChar2 ){
-            nyawa -= 0.5;
+            nyawa -= 2.5;
         }
     }
 
 
 
-    if (nyawa == 0){
-        printf("GAME OVER");
-        glutDestroyWindow(0);
-        //exit(0);
+    if (nyawa <= 0){
+        akhir = true;
+        rintangan1 = false;
+        rintangan2 = false;
     }
 
 
@@ -723,13 +736,16 @@ void selectorSt(void){
         }
         else if (rintangan2 == true){
             stageduaisi();
+        } else if(akhir == true){
+            ended();
+
         }
     glPopMatrix();
 
     if(GetAsyncKeyState(VK_NUMPAD2)){
         rintangan1 = true;
         rintangan2 = false;
-    } else if ( /*y_char>=45 && x_char <= -35*/ GetAsyncKeyState(VK_SPACE)){
+    } else if ( y_char>=45 && x_char <= -35 ||GetAsyncKeyState(VK_SPACE) ){
         rintangan1 = false;
         rintangan2 = true;
     }
@@ -807,7 +823,7 @@ void displayMe(void){
 //	drawText(9, 40, cetakScore);
 	drawText(65, 51, "Nyawa: ");
 	drawText(68, 55, "The Adventure of Ghifari");
-	drawText(9, 44, cetakNyawa);
+
 
     glFlush();
     glutSwapBuffers();
@@ -827,7 +843,7 @@ int main(int argc, char** argv){
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(1000, 600);
 	glutInitWindowPosition(0,0);
-	glutCreateWindow("Sepupu Steanly");
+	glutCreateWindow("The Adventure of Ghifari");
 	glutTimerFunc(1,controller,0);
 	glutDisplayFunc(displayMe);
 	gluOrtho2D(0, 100, 0, 60);
