@@ -20,12 +20,12 @@
 
 #include <stdlib.h>
 
-void displayMe(void)
+void bina(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+
 
     glMatrixMode(GL_MODELVIEW);
-    glColor3f(1.0,0.0,0.0);
+    glColor3ub(255,255,255);
     glBegin(GL_QUADS);
     glVertex2f(0.8,0.8);
     glVertex2f(1,0.8);
@@ -35,7 +35,7 @@ void displayMe(void)
     glFlush();
 
     glMatrixMode(GL_MODELVIEW);
-    glColor3f(1.0,0.0,0.0);
+    glColor3ub(255,255,255);
     glBegin(GL_TRIANGLES);
     glVertex2f(0.8,0.8);
     glVertex2f(1,0.8);
@@ -44,7 +44,7 @@ void displayMe(void)
     glFlush();
 
     glMatrixMode(GL_MODELVIEW);
-    glColor3f(1.0,0.0,0.0);
+    glColor3ub(255,255,255);
     glBegin(GL_TRIANGLES);
     glVertex2f(1,0.8);
     glVertex2f(1.2,0.7);
@@ -53,7 +53,7 @@ void displayMe(void)
     glFlush();
 
     glMatrixMode(GL_MODELVIEW);
-    glColor3f(1.0,0.0,0.0);
+    glColor3ub(255,255,255);
     glBegin(GL_TRIANGLES);
     glVertex2f(1,0.6);
     glVertex2f(0.89,0.4);
@@ -62,26 +62,21 @@ void displayMe(void)
     glFlush();
 
     glMatrixMode(GL_MODELVIEW);
-    glColor3f(1.0,0.0,0.0);
+    glColor3ub(255,255,255);
     glBegin(GL_TRIANGLES);
     glVertex2f(0.8,0.6);
     glVertex2f(0.6,0.7);
     glVertex2f(0.8,0.8);
     glEnd();
-    glFlush();
 
-    glutSwapBuffers();
+
+
 }
 
-int main(int argc, char** argv){
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-	glutInitWindowSize(1368, 728);
-	glutInitWindowPosition(0,0);
-	glutCreateWindow("Hello world!");
-	glutDisplayFunc(displayMe);
-	gluOrtho2D(0, 50, 0, 50);
-	glutMainLoop();
-	return 0;
-}
+void bintang (void){
+    glPushMatrix();
+    glScalef(5,5,0);
+    bina();
+    glPopMatrix();
 
+}

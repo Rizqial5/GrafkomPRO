@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Asset\Tantangan Tembok\tembok.cpp"
 #include "Asset\DesainCharInsya\Char.cpp"
+#include "Asset\Peluru bintang versi kecil\main.cpp"
 #include "stage2.cpp"
 using namespace std;
 
@@ -39,10 +40,24 @@ float x_bataskananChar = 54.5;
 float y_batasatasChar = 19.5;
 float y_batasbawahChar = 5;
 
+float x_bataskiriChar2 = 5.5;
+float x_bataskananChar2 = 14.5;
+float y_batasatasChar2 = 18.5;
+float y_batasbawahChar2 = 4;
+
 float x_bataskiriBOX = 5;
 float x_bataskananBOX = 34;
 float y_batasatasBOX = 48;
 float y_batasbawahBOX = 40;
+
+float x_bataskananpeluru = 30.5;
+float x_bataskiripeluru = 28;
+float y_batasataspeluru = 57;
+float y_batasbawahpeluru = 55;
+
+float y_peluru;
+
+
 int nyawa = 100;
 int score ;
 char cetakScore[1000];
@@ -332,6 +347,52 @@ void kotak(void){
 
 
 }
+
+void posBintang(void){
+    glPushMatrix();
+    glTranslatef(25,52.5,0);
+    bintang();
+    glPopMatrix();
+
+
+}
+
+
+void peluru(void){
+
+
+    glPushMatrix();
+
+         if(rintangan2==true){
+        glTranslatef(25,52.5,0);
+
+        y_peluru += -0.5;
+
+        y_batasataspeluru += -0.5;
+        y_batasbawahpeluru += -0.5;
+        glTranslatef(0,y_peluru,0);
+
+        bintang();
+        if (y_peluru <= -60){
+        y_peluru = 0;
+
+
+        y_batasataspeluru = 57;
+        y_batasbawahpeluru = 55;
+        }
+
+    }
+
+
+
+    glPopMatrix();
+
+    cout<<"y peluru : "<<y_batasbawahpeluru<<endl;
+
+
+}
+
+
 void kotakpos(void){
 
     glPushMatrix();
@@ -458,7 +519,7 @@ void charpos(void){
     colliSTp();
 
 
-    //if (obstacle == false){
+    if (rintangan1 == true){
         if (GetAsyncKeyState(VK_RIGHT)){
         x_char+= speed ;
 
@@ -490,8 +551,44 @@ void charpos(void){
         CharUp = false;
         CharDown =true;
         }
-        cout<<"x  : "<<x_char<<endl;
-       cout<<"y : "<<y_char<<endl;
+    }
+    else if (rintangan2 == true){
+        if (GetAsyncKeyState(VK_RIGHT)){
+        x_char+= speed ;
+
+        x_bataskananChar2 += speed;
+        x_bataskiriChar2 += speed;
+        } else if (GetAsyncKeyState(VK_LEFT)){
+        x_char += -speed;
+
+        x_bataskiriChar2 += -speed;
+        x_bataskananChar2 += -speed;
+        }
+        if (GetAsyncKeyState(VK_UP)){
+        y_char += speed;
+         if(rintangan2 == true){
+            y_char2 += speed;
+         }
+        y_batasatasChar2 += speed;
+        y_batasbawahChar2 += speed;
+        CharUp = true;
+        CharDown = false;
+
+        } else if (GetAsyncKeyState(VK_DOWN)){
+        y_char += -speed;
+        if(rintangan2 == true){
+            y_char2 += -speed;
+         }
+        y_batasbawahChar2 += -speed;
+        y_batasatasChar2 += -speed;
+        CharUp = false;
+        CharDown =true;
+        }
+    }
+
+
+
+       cout<<"y : "<<y_batasatasChar2<<endl;
 
 
 }
@@ -525,18 +622,33 @@ void posisiHati2(void){
 
 }
 void collider(void){
+    if (rintangan1 == true){
+         if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
+            nyawa -= 5;
+            y_char -= speed;
+            y_batasatasChar -= speed;
+            }
 
-    if (y_batasbawahBOX<=y_batasatasChar && y_batasatasChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        nyawa -= 5;
-        y_char -= speed;
-        y_batasatasChar -= speed;
+         else if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
+            nyawa -= 5;
+            y_char += speed;
+            y_batasbawahChar += speed;
+            }
+    }
+    else if (rintangan2 == true){
+        if ( y_batasataspeluru <= y_batasatasChar2&&
+            y_batasataspeluru>= y_batasbawahChar2 &&
+             y_batasbawahpeluru <= y_batasatasChar2&&
+            y_batasbawahpeluru>= y_batasbawahChar2 &&
+            x_bataskiripeluru >= x_bataskiriChar2 &&
+            x_bataskiripeluru <= x_bataskananChar2&&
+            x_bataskananpeluru >= x_bataskiriChar2 &&
+            x_bataskananpeluru <= x_bataskananChar2 ){
+            nyawa -= 0.5;
+        }
     }
 
-    else if (y_batasbawahBOX<=y_batasbawahChar && y_batasbawahChar<= y_batasatasBOX && x_bataskananBOX>=x_bataskananChar && x_bataskananChar>= x_bataskiriBOX ){
-        nyawa -= 5;
-        y_char += speed;
-        y_batasbawahChar += speed;
-    }
+
 
     if (nyawa == 0){
         printf("GAME OVER");
@@ -596,7 +708,10 @@ void stageduaisi(void){
     glPushMatrix();
     stage2();
     charpos();
-    //collider();
+    posBintang();
+    peluru();
+
+    collider();
 
     glPopMatrix();
 
@@ -614,7 +729,7 @@ void selectorSt(void){
     if(GetAsyncKeyState(VK_NUMPAD2)){
         rintangan1 = true;
         rintangan2 = false;
-    } else if (y_char>=45 && x_char <= -35/*GetAsyncKeyState(VK_NUMPAD3)*/){
+    } else if ( /*y_char>=45 && x_char <= -35*/ GetAsyncKeyState(VK_SPACE)){
         rintangan1 = false;
         rintangan2 = true;
     }
