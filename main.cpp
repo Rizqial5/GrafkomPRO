@@ -71,8 +71,9 @@ bool CharUp = true;
 bool CharDown;
 
 bool rintangan1 = true;
-bool rintangan2;
+bool rintangan2 ;
 bool akhir;
+bool finish;
 
 
 void kotakKeterangan(void){
@@ -446,22 +447,21 @@ void colliST1(void){
 }
 
 void colliST2(void){
-    if (x_char>=41){
-       x_char += -speed;
+    if (x_char2>=41){
+       x_char2 += -speed;
        x_bataskananChar2 += -speed;
        x_bataskiriChar2  += -speed;
-       if (y_char>=42){
-            akhir = true;
-            rintangan1 = false;
+       if (y_char2>=42){
             rintangan2 = false;
-            x_char += speed;
+            finished();
+            x_char2 += speed;
             x_bataskananChar2 += speed;
             x_bataskiriChar2  += -speed;
 
        }
 
-    } else if (x_char <= -1){
-        x_char+= speed ;
+    } else if (x_char2 <= -1){
+        x_char2+= speed ;
         x_bataskiriChar2 += speed;
         x_bataskananChar2 += speed;
     }
@@ -511,7 +511,7 @@ void charpos(void){
     } else if (rintangan2 == true){
 
         glTranslatef(5,0,0);
-        glTranslatef(x_char,y_char2,0);
+        glTranslatef(x_char2,y_char2,0);
         if(CharUp == true){
             upchar();
         }
@@ -545,9 +545,8 @@ void charpos(void){
         }
         if (GetAsyncKeyState(VK_UP)){
         y_char += speed;
-         if(rintangan2 == true){
-            y_char2 += speed;
-         }
+
+
         y_batasatasChar += speed;
         y_batasbawahChar += speed;
         CharUp = true;
@@ -555,9 +554,7 @@ void charpos(void){
 
         } else if (GetAsyncKeyState(VK_DOWN)){
         y_char += -speed;
-        if(rintangan2 == true){
-            y_char2 += -speed;
-         }
+
         y_batasbawahChar += -speed;
         y_batasatasChar += -speed;
         CharUp = false;
@@ -566,31 +563,27 @@ void charpos(void){
     }
     else if (rintangan2 == true){
         if (GetAsyncKeyState(VK_RIGHT)){
-        x_char+= speed ;
+        x_char2+= speed ;
 
         x_bataskananChar2 += speed;
         x_bataskiriChar2 += speed;
         } else if (GetAsyncKeyState(VK_LEFT)){
-        x_char += -speed;
+        x_char2 += -speed;
 
         x_bataskiriChar2 += -speed;
         x_bataskananChar2 += -speed;
         }
         if (GetAsyncKeyState(VK_UP)){
-        y_char += speed;
-         if(rintangan2 == true){
-            y_char2 += speed;
-         }
+        y_char2 += speed;
+
         y_batasatasChar2 += speed;
         y_batasbawahChar2 += speed;
         CharUp = true;
         CharDown = false;
 
         } else if (GetAsyncKeyState(VK_DOWN)){
-        y_char += -speed;
-        if(rintangan2 == true){
-            y_char2 += -speed;
-         }
+        y_char2 += -speed;
+
         y_batasbawahChar2 += -speed;
         y_batasatasChar2 += -speed;
         CharUp = false;
@@ -663,10 +656,13 @@ void collider(void){
 
 
     if (nyawa <= 0){
+
         akhir = true;
+        rintangan2=false;
         rintangan1 = false;
-        rintangan2 = false;
+
     }
+    cout<<akhir<<endl;
 
 
 }
@@ -728,14 +724,22 @@ void stageduaisi(void){
 
 }
 void selectorSt(void){
-    glPushMatrix();;
+    glPushMatrix();
         if(rintangan1 == true){
             stagesatuisi();
+            if(akhir == true){
+            rintangan1 = false;
+            ended();
+            cout<<"bisa"<<endl;}
         }
         else if (rintangan2 == true){
             stageduaisi();
-        } else if(akhir == true){
+            if(akhir == true){
             ended();
+            cout<<"bisa"<<endl;}
+        }
+         else if(finish == true){
+            finished();
 
         }
     glPopMatrix();
@@ -746,8 +750,6 @@ void selectorSt(void){
     } else if ( y_char>=45 && x_char <= -35 || GetAsyncKeyState(VK_SPACE) ){
         rintangan1 = false;
         rintangan2 = true;
-    } else if ( y_char>=36 && x_char >=30){
-        finished();
     }
     //cout<<"x_char : "<<x_char<<endl;
     //cout<<"yyy_char : "<<y_char<<endl;
