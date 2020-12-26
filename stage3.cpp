@@ -51,6 +51,42 @@ void ended(void){
     glColor3b(121,121,231);
         drawTulisan(10,40, "THE ADVENTURE OF GHIFFARI");
         drawTulisan(10,30, "GAME OVER");
+}
+void finished(void){
 
 
+    glBegin(GL_POLYGON);
+        glColor3ub(255,51,51);
+        glVertex2f(0, 60);
+        glVertex2f(0, 0);
+        glVertex2f(60, 0);
+        glVertex2f(60,60);
+        glEnd();
+
+        glBegin(GL_POLYGON);
+        glColor3ub(255,51,51);
+        glVertex2f(5, 5);
+        glVertex2f(55, 5);
+        glVertex2f(55, 55);
+        glVertex2f(5,55);
+        glEnd();
+//hitam finish
+        glBegin(GL_POLYGON);
+        glColor3ub(255,51,51);
+        glVertex2f(45, 0);
+        glVertex2f(55, 0);
+        glVertex2f(55, 5);
+        glVertex2f(45, 5);
+        glEnd();
+//hijau start
+        glBegin(GL_POLYGON);
+        glColor3ub(255,51,51);
+        glVertex2f(0, 40);
+        glVertex2f(5, 40);
+        glVertex2f(5, 55);
+        glVertex2f(0, 55);
+        glEnd();
+    glColor3b(0,0,0);
+        drawTulisan(10,40, "THE ADVENTURE OF GHIFFARI");
+        drawTulisan(5,30, "Selamat Anda Telah Selesai Menyelesaikan Game");
 }

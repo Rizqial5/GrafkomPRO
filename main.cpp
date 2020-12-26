@@ -356,7 +356,6 @@ void posBintang(void){
     bintang();
     glPopMatrix();
 
-
 }
 
 
@@ -601,7 +600,7 @@ void charpos(void){
 
 
 
-       cout<<"y : "<<y_batasatasChar2<<endl;
+       //cout<<"y : "<<y_batasatasChar2<<endl;
 
 
 }
@@ -723,7 +722,6 @@ void stageduaisi(void){
     charpos();
     posBintang();
     peluru();
-
     collider();
 
     glPopMatrix();
@@ -745,10 +743,15 @@ void selectorSt(void){
     if(GetAsyncKeyState(VK_NUMPAD2)){
         rintangan1 = true;
         rintangan2 = false;
-    } else if ( y_char>=45 && x_char <= -35 ||GetAsyncKeyState(VK_SPACE) ){
+    } else if ( y_char>=45 && x_char <= -35 || GetAsyncKeyState(VK_SPACE) ){
         rintangan1 = false;
         rintangan2 = true;
+    } else if ( y_char>=36 && x_char >=30){
+        finished();
     }
+    //cout<<"x_char : "<<x_char<<endl;
+    //cout<<"yyy_char : "<<y_char<<endl;
+
 
 
 }
@@ -770,15 +773,7 @@ void controller(int data){
     glutPostRedisplay();
     glutTimerFunc(1,controller,0);
 }
-void output(int x, int y, float r, float g, float b, char *string, void *font) {
-    glColor3f(r, g, b);
-    glRasterPos2f(x, y);
-    int len, i;
-    len = (int) strlen(string);
-    for (i = 0; i < len; i++) {
-        glutBitmapCharacter(font, string[i]);
-    }
-}
+
 void drawText(int x, int y, const char *string) {
 	glRasterPos2f(x, y);
 	int len = (int)strlen(string);
